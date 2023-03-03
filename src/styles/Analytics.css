@@ -1,0 +1,77 @@
+.analytics {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4rem;
+
+}
+
+.analytics label {
+  flex-basis: 25%;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.analytics input[type="text"],
+.analytics input[type="date"],
+.analytics input[type="checkbox"] {
+  flex-basis: 60%;
+  max-width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.analytics input[type="checkbox"] {
+  flex-basis: auto;
+  margin-left: 1rem;
+}
+
+.analytics input[type="text"]:focus,
+.analytics input[type="date"]:focus,
+.analytics input[type="checkbox"]:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.analytics button[type="submit"] {
+  flex-basis: 15%;
+  color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .analytics {
+    flex-direction: column;
+  }
+  .analytics label {
+    flex-basis: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+  .analytics input[type="text"],
+  .analytics input[type="date"],
+  .analytics input[type="checkbox"] {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .analytics input[type="checkbox"] {
+    margin-left: 0;
+  }
+  .analytics button[type="submit"] {
+    flex-basis: 100%;
+  }
+}

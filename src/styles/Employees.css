@@ -1,0 +1,64 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.actions-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.button:hover{
+  color: #333;
+}
+
+.edit-icon,
+.delete-icon {
+  width: 18px;
+  height: 18px;
+  fill: #555;
+  margin-right: 5px;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+  fill: #333;
+}
+
+.add {
+  padding: 30px;
+  margin-left: 85%;
+}
+
+@media only screen and (max-width: 768px) {
+  th,
+  td {
+    padding: 8px;
+  }
+
+  .action-buttons button {
+    font-size: 0.8em;
+    padding: 4px 8px;
+  }
+}
