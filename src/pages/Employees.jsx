@@ -91,13 +91,13 @@ const Employees = () => {
               <td>
                 <button
                     
-                  className="btn btn-primary mr-2"
+                  className="edit-btn btn-primary mr-2"
                   onClick={() => editRow(employee)}
                 >
                   Edit
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="view-btn btn-danger"
                   onClick={() => deleteEmployee(employee.id)}
                 >
                   Delete

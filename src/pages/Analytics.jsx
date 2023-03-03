@@ -71,15 +71,18 @@ const Analytics = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="paid">Paid:</label>
-            <input
-              type="checkbox"
-              className="form-control"
-              id="paid"
-              checked={paid}
-              onChange={handlePaidChange}
-            />
-          </div>
+  <label htmlFor="paid">Paid:</label>
+  <select
+    className="form-control"
+    id="paid"
+    value={paid ? 'yes' : 'no'}
+    onChange={handlePaidChange}
+  >
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+</div>
+
           <div className="form-group">
             <label htmlFor="transactionId">Transaction ID:</label>
             <input

@@ -1,7 +1,7 @@
 {
   "name": "react-sidebar",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "dependencies": {
     "autoprefixer": "^10.4.13",
     "cra-template": "1.1.3",

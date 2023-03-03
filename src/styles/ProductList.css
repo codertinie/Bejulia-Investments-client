@@ -1,53 +1,72 @@
+/* Default styles */
 table {
-  border-collapse: collapse;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  overflow: hidden;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
 }
 
 th,
 td {
   text-align: left;
-  padding: 12px;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
 }
 
 th {
-  background-color: #007bff;
-  color: white;
-}
-
-tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.action-buttons button {
-  padding: 5px 10px;
-  border: none;
+td:last-child {
+  white-space: nowrap;
+}
+
+.view-btn,
+.edit-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.view-btn {
+  color: #fff;
   background-color: #007bff;
-  color: white;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  border-color: #007bff;
 }
 
-.view-btn:hover {
-  background-color: #0056b3;
+.edit-btn {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin-left: 1rem;
 }
 
-button:not(:last-child) {
-  margin-right: 5px;
-}
-
-@media only screen and (max-width: 768px) {
-  th,
-  td {
-    padding: 8px;
+/* Media queries */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.875rem;
   }
 
-  .action-buttons button {
-    font-size: 0.8em;
-    padding: 4px 8px;
+  th,
+  td {
+    padding: 0.5rem;
+  }
+
+  td:last-child {
+    padding: 0.5rem 0;
+  }
+
+  .view-btn,
+  .edit-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .edit-btn {
+    margin-left: 0.5rem;
   }
 }

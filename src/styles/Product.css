@@ -1,0 +1,51 @@
+.product-form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.product-form h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.product-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.product-form input {
+  display: block;
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.product-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-form button:hover {
+  background-color: #0069d9;
+}
+
+@media only screen and (max-width: 768px) {
+  .product-form {
+    padding: 1rem;
+  }
+}

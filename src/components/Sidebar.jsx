@@ -4,7 +4,7 @@ import {
     FaBars,
     FaUserAlt,
     FaRegChartBar,
-    FaCommentAlt,
+    FaPeopleArrows,
     FaShoppingBag,
     FaThList
 }from "react-icons/fa";
@@ -33,7 +33,7 @@ const Sidebar = ({children}) => {
         {
             path:"/employees",
             name:"Employees",
-            icon:<FaCommentAlt/>
+            icon:<FaPeopleArrows/>
         },
         {
             path:"/product",
