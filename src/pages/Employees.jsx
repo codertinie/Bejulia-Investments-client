@@ -1,33 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Employees.css";
 
 const Employees = () => {
-  const [employees, setEmployees] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "johndoe@example.com",
-      role: "Manager",
-      joinedAt: "2021-02-10",
-      active: true,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "janesmith@example.com",
-      role: "Developer",
-      joinedAt: "2021-03-15",
-      active: false,
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bobjohnson@example.com",
-      role: "Designer",
-      joinedAt: "2021-04-20",
-      active: true,
-    },
-  ]);
+  const [employees, setEmployees] = useState([]);
+
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:3000/employees")
+    .then(resp => resp.json())
+    .then(data => setEmployees(data))
+    
+  },[])
+  console.log(employees)
+  
 
   const [editing, setEditing] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState({
@@ -36,7 +21,7 @@ const Employees = () => {
     email: "",
     role: "",
     joinedAt: "",
-    active: false,
+    active: "",
   });
 
   const editRow = (employee) => {
@@ -46,7 +31,7 @@ const Employees = () => {
       name: employee.name,
       email: employee.email,
       role: employee.role,
-      joinedAt: employee.joinedAt,
+      joinedAt: employee.joined_at,
       active: employee.active,
     });
   };
@@ -86,7 +71,7 @@ const Employees = () => {
               <td>{employee.name}</td>
               <td>{employee.email}</td>
               <td>{employee.role}</td>
-              <td>{employee.joinedAt}</td>
+              <td>{employee.joined_at}</td>
               <td>{employee.active ? "Active" : "Inactive"}</td>
               <td>
                 <button
