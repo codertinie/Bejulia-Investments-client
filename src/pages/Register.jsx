@@ -15,7 +15,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/employees', {
+      const response = await axios.post('http://127.0.0.1:3000/employees', {
         name,
         username,
         email,

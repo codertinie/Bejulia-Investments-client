@@ -1,72 +1,52 @@
 import React, { useState } from "react";
-
-
 import "../styles/Login.css";
 
-function Login() {
+function Login({ setCurrentUser }) {
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
+  const [superUser, setSuperUser] = useState ([])
+  const [user, setUser] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
-    //Prevent page reload
     event.preventDefault();
 
-    var { uname, pass } = document.forms[0];
-
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
+    // Send a request to the server to authenticate the user
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.username)
+        
+        // Handle the authentication response from the server
+        if (data.username === "admin") {
+          setCurrentUser(data)
+        }else{
+          setUser(data)
+        }
+          
+      })
+      .catch((error) => console.error(error));
   };
-
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-
   // JSX code for login form
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Username </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+          <input type="text" name="uname" required 
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}/>
         </div>
         <div className="input-container">
           <label>Password </label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
+          <input type="password" name="pass" required 
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}/>
+          
         </div>
         <div className="button-container">
           <input type="submit" />
@@ -79,7 +59,8 @@ function Login() {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        {/* {isSubmitted ? <div>User is successfully logged in</div> : renderForm} */}
+        {renderForm}
       </div>
     </div>
   );

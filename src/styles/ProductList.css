@@ -7,13 +7,20 @@ table {
 
 th,
 td {
-  text-align: left;
+  /* text-align: left; */
   padding: 1rem;
   border-bottom: 1px solid #dee2e6;
 }
 
+/* thead {
+  position: fixed;
+  top: 0;
+} */
+
+
 th {
-  background-color: #f2f2f2;
+  background-color: #13a6eb;
+  width: auto;
 }
 
 td:last-child {

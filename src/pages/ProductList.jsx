@@ -11,7 +11,7 @@ const ProductList = () => {
       .catch(error => console.log(error));
   }, []);
   
-console.log (products)
+// console.log (products)
 
   return (
     <div style={{ height: "550px", overflow: "scroll" }}>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Employees.css";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -60,11 +62,14 @@ const Employees = () => {
       });
   };
   
+  function addEmployee() {
+    navigate("/register")
+  }
 
   return (
     <div className="table-responsive">
       <div className="add">
-        <button>ADD Employee</button>
+        <button onClick={addEmployee}>ADD Employee</button>
       </div>
       <table className="table table-bordered table-striped table-hover">
         <thead className="thead-dark">

@@ -1,136 +1,94 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Analytics.css";
 
 const Analytics = () => {
-  const [invoices, setInvoices] = useState([]);
-  const [customer, setCustomer] = useState("");
-  const [total, setTotal] = useState("");
-  const [paid, setPaid] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
-  const [date, setDate] = useState("");
+  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [stockAmount, setStockAmount] = useState(0);
 
-  const handleCustomerChange = (e) => {
-    setCustomer(e.target.value);
-  };
+  const [products, setProducts] = useState([])
+  const [productName, setProductName] = useState('');
+  const [productId, setProductId] = useState('');
+  const [productNames, setProductNames] = useState([]);
 
-  const handleTotalChange = (e) => {
-    setTotal(e.target.value);
-  };
+  useEffect(() => {
+    // Fetch the current stock amount of the product from the server
+    if (productId) {
+      fetch(`http://127.0.0.1:3000/products/${productId}`)
+        .then(response => response.json())
+        .then(data => setStockAmount(data.stock_amount))
+        .catch(error => console.error(error));
+    }
+  }, [productId]);
 
-  const handlePaidChange = (e) => {
-    setPaid(e.target.checked);
-  };
+  useEffect(() => {
+    // Fetch the list of product names and IDs from the server
+    fetch('http://127.0.0.1:3000/products')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data)
+        setProductNames(data.map(product => product.name));
+        setProductId(data[0].id); // Set the default product ID to the first product
+      })
+      .catch(error => console.error(error));
+  }, []);
 
-  const handleTransactionIdChange = (e) => {
-    setTransactionId(e.target.value);
-  };
+  // console.log( products)
+  // console.log(productName)
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const createInvoice = (e) => {
-    e.preventDefault();
-    const newInvoice = {
-      customer: customer,
-      total: total,
-      paid: paid,
-      transactionId: transactionId,
-      date: date
-    };
-    setInvoices([...invoices, newInvoice]);
-    setCustomer("");
-    setTotal("");
-    setPaid(false);
-    setTransactionId("");
-    setDate("");
-  };
+    // Send a request to the server to update the stock amount
+    fetch(`http://127.0.0.1:3000/products/${productId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity })
+    })
+      .then(response => response.json())
+      .then(data => setStockAmount(data.stock_amount))
+      .catch(error => console.error(error));
+  }
 
+
+  const handleProductNameChange = (event) => {
+    const selectedProductName = event.target.value;
+    setProductName(selectedProductName);
+    // Find the product ID for the selected product name
+    const selectedProduct = products.find(product => product.name === selectedProductName);
+    if (selectedProduct) {
+      setProductId(selectedProduct.id);
+    }
+    
+  }
+
+  
   return (
     <div>
-      <>
-        <form onSubmit={createInvoice} className="analytics">
-          <div className="form-group">
-            <label htmlFor="customer">Customer:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="customer"
-              value={customer}
-              onChange={handleCustomerChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="total">Total:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="total"
-              value={total}
-              onChange={handleTotalChange}
-            />
-          </div>
-          <div className="form-group">
-  <label htmlFor="paid">Paid:</label>
-  <select
-    className="form-control"
-    id="paid"
-    value={paid ? 'yes' : 'no'}
-    onChange={handlePaidChange}
-  >
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-</div>
-
-          <div className="form-group">
-            <label htmlFor="transactionId">Transaction ID:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="transactionId"
-              value={transactionId}
-              onChange={handleTransactionIdChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="date">Date:</label>
-            <input
-              type="date"
-              className="form-control"
-              id="date"
-              value={date}
-              onChange={handleDateChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Create Invoice
-          </button>
-        </form>
-        <table>
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Total</th>
-              <th>Paid</th>
-              <th>Transaction ID</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {invoices.map((invoice, index) => (
-              <tr key={index}>
-                <td>{invoice.customer}</td>
-                <td>{invoice.total}</td>
-                <td>{invoice.paid ? "Yes" : "No"}</td>
-                <td>{invoice.transactionId}</td>
-                <td>{invoice.date}</td>
-              </tr>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Product:
+          <select value={productName} onChange={handleProductNameChange}>
+            <option value="">-- Select a product --</option>
+            {productNames.map(name => (
+              <option key={name.id} value={name}>{name}</option>
             ))}
-            </tbody>
-        </table>
-        
-      </>
+          </select>
+        </label>
+        <br />
+        <label>
+          Price:
+          <input type="number" value={price} onChange={(event) => setPrice(event.target.value)} />
+        </label>
+        <br />
+        <label>
+          Quantity:
+          <input type="number" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
+        </label>
+        <br />
+        <button type="submit">Sell</button>
+        <p>Stock amount: {stockAmount}</p>
+      </form>
     </div>
   );
 };
