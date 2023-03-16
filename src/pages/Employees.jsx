@@ -46,8 +46,20 @@ const Employees = () => {
   };
 
   const deleteEmployee = (id) => {
-    setEmployees(employees.filter((employee) => employee.id !== id));
+    fetch(`http://127.0.0.1:3000/employees/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        setEmployees(employees.filter((employee) => employee.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
+  
 
   return (
     <div className="table-responsive">
