@@ -1,33 +1,59 @@
-import React, { useState } from 'react';
-import "../styles/Product.css"
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/Product.css";
 
 const Product = ({ onAddProduct }) => {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [stockAmount, setStockAmount] = useState('');
-  const [price, setPrice] = useState('');
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [stockAmount, setStockAmount] = useState("");
+  const [price, setPrice] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if any fields are empty
+    if (!name || !category || !stockAmount || !price) {
+      alert("Please fill in all fields");
+      return;
+    }
 
     // Create new product object
     const newProduct = {
       name: name,
       category: category,
-      stockAmount: stockAmount,
-      price: price
+      stock_amount: stockAmount,
+      price: price,
     };
 
-    // Call onAddProduct function with new product object
-    onAddProduct(newProduct);
+    try {
+      // Make POST request to the Rails API endpoint
+      const response = await fetch("http://localhost:3000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      });
 
-    // Reset form fields
-    setName('');
-    setCategory('');
-    setStockAmount('');
-    setPrice('');
-  }
+      if (!response.ok) {
+        throw new Error("Failed to add product.");
+      }
+
+      // Call onAddProduct function with new product object
+      onAddProduct(newProduct);
+
+      // Reset form fields
+      setName("");
+      setCategory("");
+      setStockAmount("");
+      setPrice("");
+    } catch (error) {
+      console.error(error);
+    }
+    //return to  product list
+    navigate("/productList");
+  };
 
   return (
     <div className="product-form">
@@ -73,7 +99,9 @@ const Product = ({ onAddProduct }) => {
             onChange={(event) => setPrice(event.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Add Product</button>
+        <button type="submit" className="btn btn-primary">
+          Add Product
+        </button>
       </form>
     </div>
   );
