@@ -14,7 +14,7 @@ const ProductList = () => {
 console.log (products)
 
   return (
-    <div style={{ height: "600px", overflow: "scroll" }}>
+    <div style={{ height: "550px", overflow: "scroll" }}>
       <table>
         <thead>
           <tr>

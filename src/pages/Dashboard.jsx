@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/products")
+      .then((response) => response.json())
+      .then((data) => {
+        const totalStockAmount = data.reduce(
+          (accumulator, product) => accumulator + product.stock_amount,
+          0
+        );
+        setTotalProducts(totalStockAmount);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div class="admin-content mx-auto">
   <h1 class="page-header">Welcome to Dashboard</h1>
@@ -11,7 +26,7 @@ const Dashboard = () => {
         <div class="col-12 col-md-4">
           <div class="dash-summary-cell">
             <p><strong>Total Products</strong></p>
-            <p>1200</p>
+            <p>{totalProducts}</p>
           </div>
         </div>
         <div class="col-12 col-md-4">
