@@ -31,7 +31,7 @@ const ProductList = () => {
               <td>{product.name}</td>
               <td>{product.category}</td>
               <td>{product.stock_amount}</td>
-              <td>${product.price}</td>
+              <td>Ksh. {product.price}</td>
               <td>
                 <button className="view-btn">View</button>
                 <button className="edit-btn">Edit</button>

@@ -36,13 +36,13 @@ const Analytics = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSellProduct = (event) => {
     event.preventDefault();
 
     // Calculate the total price based on the price and quantity
     const totalPrice = price * quantity;
 
-    // Send a request to the server to update the stock amount
+    // Send a request to the server to update the stock amount and create a new sale record
     fetch(`http://127.0.0.1:3000/products/${productId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -52,7 +52,32 @@ const Analytics = () => {
       .then((data) => {
         setStockAmount(data.stock_amount);
       })
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
+
+    fetch("http://localhost:3000/sales", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product: productName,
+        quantity: quantity,
+        amount: totalPrice,
+        date: new Date().toISOString().split("T")[0],
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Notify the user that the sale has been made successfully
+          alert("Sale made successfully!");
+          // Clear the form
+          setProductName("");
+          setProductId("");
+          setPrice(0);
+          setQuantity(0);
+        } else {
+          throw new Error("Failed to create sale");
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleProductNameChange = (event) => {
@@ -67,19 +92,17 @@ const Analytics = () => {
       setPrice(selectedProduct.price);
     }
   };
-  console.log(products);
-  return (
 
+  return (
     <div className="analytics">
-      
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSellProduct}>
         <label>
           Product:
           <select value={productName} onChange={handleProductNameChange}>
-            <option value="">{}</option>
-            {productNames.map((name) => (
-              <option key={name.id} value={name}>
-                {name}
+            <option value="">--Select Product--</option>
+            {productNames.map((productName, index) => (
+              <option key={products[index].id} value={productName}>
+                {productName}
               </option>
             ))}
           </select>
@@ -100,13 +123,11 @@ const Analytics = () => {
         </label>
         <br />
         <button type="submit">Sell</button>
-        <p>Total price: {price * quantity}</p>
-        <p>Stock amount: {stockAmount}</p>
+        <p>Total price: Ksh. {price * quantity}</p>
+        <p> {stockAmount} units remaining</p>
       </form>
     </div>
   );
 };
 
 export default Analytics;
-
-
