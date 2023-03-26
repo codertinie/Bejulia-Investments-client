@@ -1,160 +1,86 @@
-/* table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 20px;
-  font-size: 1rem;
-}
-
-table th {
-  background-color: #f1f1f1;
-  font-weight: bold;
-  text-align: left;
-  padding: 10px;
-}
-
-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-table td:first-child {
-  font-weight: bold;
-}
-
-
 .analytics {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 4rem;
-
 }
 
-.analytics label {
-  flex-basis: 25%;
-  text-align: right;
-}
-
-.analytics input[type="text"],
-.analytics input[type="date"],
-.analytics input[type="checkbox"] {
-  flex-basis: 60%;
-  max-width: 200px;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.analytics input[type="checkbox"] {
-  flex-basis: auto;
-  margin-left: 1rem;
-}
-
-.analytics input[type="text"]:focus,
-.analytics input[type="date"]:focus,
-.analytics input[type="checkbox"]:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.analytics button[type="submit"] {
-  flex-basis: 15%;
-  color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
-    padding: 0.5rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-}
-
-@media only screen and (max-width: 768px) {
-  .analytics {
-    flex-direction: column;
-  }
-  .analytics label {
-    flex-basis: 100%;
-    text-align: left;
-    margin-bottom: 0.5rem;
-  }
-  .analytics input[type="text"],
-  .analytics input[type="date"],
-  .analytics input[type="checkbox"] {
-    flex-basis: 100%;
-    margin-bottom: 0.5rem;
-  }
-  .analytics input[type="checkbox"] {
-    margin-left: 0;
-  }
-  .analytics button[type="submit"] {
-    flex-basis: 100%;
-  }
-} */
-
-.analytics {
-  width: 400px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-}
-
-.analytics form {
+.analytics-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.analytics label {
-  margin-bottom: 10px;
-}
-
-.analytics 
-select,
-input[type="number"] {
-  margin-left: 10px;
-  padding: 5px;
-  border: none;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.product label {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.product select {
   font-size: 16px;
-  width: 200px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.analytics 
-select:focus,
-input[type="number"]:focus {
-  outline: none;
-  box-shadow: 0px 0px 5px rgba(0, 0, 255, 0.5);
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.analytics 
+.form-field label {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-field input {
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.total-price {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.stock-amount {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
 button[type="submit"] {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #1e90ff;
   color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.analytics button[type="submit"]:hover {
-  background-color: #0069d9;
-}
-
-.analytics p {
-  margin-top: 20px;
-  font-size: 16px;
+button[type="submit"]:hover {
+  background-color: #007bff;
 }

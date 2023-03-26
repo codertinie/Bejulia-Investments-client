@@ -97,7 +97,8 @@ const Analytics = () => {
 
   return (
     <div className="analytics">
-      <form onSubmit={handleSellProduct}>
+      <form className="analytics-form" onSubmit={handleSellProduct}>
+        <div className="product">
         <label>
           Product:
           <select value={productName} onChange={handleProductNameChange}>
@@ -109,12 +110,15 @@ const Analytics = () => {
             ))}
           </select>
         </label>
+        </div>
         <br />
+        <div>
         <label>
           Price:
           <input type="number" value={price} readOnly />
         </label>
-        <br />
+        </div>
+        <div>
         <label>
           Quantity:
           <input
@@ -123,10 +127,18 @@ const Analytics = () => {
             onChange={(event) => setQuantity(event.target.value)}
           />
         </label>
+        </div>
         <br />
-        <button type="submit">Sell</button>
+        <br />
+        <div className="total-price">
         <p>Total price: Ksh. {price * quantity}</p>
+        </div>
+        <div className="stock-amount">
         <p> {stockAmount} units remaining</p>
+        </div>
+        <div>
+        <button type="submit">Sell</button>
+        </div>
       </form>
     </div>
   );
