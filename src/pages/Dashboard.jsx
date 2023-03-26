@@ -38,6 +38,23 @@ const Dashboard = () => {
 
   const uniqueProducts = Array.from(new Set(filteredSales.map(sale => sale.product?.name)));
 
+  const getTotalSalesAmountForDate = () => {
+    const salesForDate = sales.filter((sale) => {
+      return sale.date === selectedDate;
+    });
+    return salesForDate.reduce(
+      (accumulator, sale) => accumulator + sale.amount,
+      0
+    );
+  };
+
+  const getTotalInvoicesForDate = () => {
+    const invoicesForDate = sales.filter((sale) => {
+      return sale.date === selectedDate;
+    });
+    return invoicesForDate.length;
+  };
+
   return (
     <>
       <div class="admin-content mx-auto">
@@ -56,9 +73,9 @@ const Dashboard = () => {
               <div class="col-12 col-md-4">
                 <div class="dash-summary-cell">
                   <p>
-                    <strong>Total Invoices</strong>
+                    <strong>Total Invoices Today</strong>
                   </p>
-                  <p>3400</p>
+                  <p>{getTotalInvoicesForDate()}</p>
                 </div>
               </div>
               <div class="col-12 col-md-4">
@@ -66,7 +83,7 @@ const Dashboard = () => {
                   <p>
                     <strong>Total Sell Today</strong>
                   </p>
-                  <p>123500</p>
+                  <p>Ksh. {getTotalSalesAmountForDate()}</p>
                 </div>
               </div>
             </div>
