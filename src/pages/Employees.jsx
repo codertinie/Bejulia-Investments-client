@@ -4,17 +4,13 @@ import "../styles/Employees.css";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://127.0.0.1:3000/employees")
-    .then(resp => resp.json())
-    .then(data => setEmployees(data))
-    
-  },[])
-  console.log(employees)
-  
+      .then((resp) => resp.json())
+      .then((data) => setEmployees(data));
+  }, []);
 
   const [editing, setEditing] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState({
@@ -22,34 +18,47 @@ const Employees = () => {
     name: "",
     email: "",
     role: "",
-    joinedAt: "",
+    joined_at: "",
     active: "",
   });
 
   const editRow = (employee) => {
-    setEditing(!editing);
+    setEditing(true);
     setCurrentEmployee({
       id: employee.id,
       name: employee.name,
       email: employee.email,
       role: employee.role,
-      joinedAt: employee.joined_at,
+      joined_at: employee.joined_at,
       active: employee.active,
     });
   };
 
-  const updateEmployee = (id, updatedEmployee) => {
-    setEditing(false);
-    setEmployees(
-      employees.map((employee) =>
-        employee.id === id ? updatedEmployee : employee
-      )
-    );
+  const updateEmployee = () => {
+    fetch(`http://127.0.0.1:3000/employees/${currentEmployee.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentEmployee),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setEmployees(
+          employees.map((employee) =>
+            employee.id === data.id ? data : employee
+          )
+        );
+        setEditing(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const deleteEmployee = (id) => {
     fetch(`http://127.0.0.1:3000/employees/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
       .then((response) => {
         if (!response.ok) {
@@ -58,13 +67,18 @@ const Employees = () => {
         setEmployees(employees.filter((employee) => employee.id !== id));
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
-  
+
   function addEmployee() {
-    navigate("/register")
+    navigate("/register");
   }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setCurrentEmployee({ ...currentEmployee, [name]: value });
+  };
 
   return (
     <div className="table-responsive">
@@ -85,25 +99,90 @@ const Employees = () => {
         <tbody>
           {employees.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.name}</td>
-              <td>{employee.email}</td>
-              <td>{employee.role}</td>
+              <td>
+                {editing && currentEmployee.id === employee.id ? (
+                  <input
+                    type="text"
+                    value={currentEmployee.name}
+                    onChange={(event) =>
+                      setCurrentEmployee({
+                        ...currentEmployee,
+                        name: event.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  employee.name
+                )}
+              </td>
+              <td>
+                {editing && currentEmployee.id === employee.id ? (
+                  <input
+                    type="email"
+                    value={currentEmployee.email}
+                    onChange={(event) =>
+                      setCurrentEmployee({
+                        ...currentEmployee,
+                        email: event.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  employee.email
+                )}
+              </td>
+              <td>
+                {editing && currentEmployee.id === employee.id ? (
+                  <input
+                    type="text"
+                    value={currentEmployee.role}
+                    onChange={(event) =>
+                      setCurrentEmployee({
+                        ...currentEmployee,
+                        role: event.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  employee.role
+                )}
+              </td>
               <td>{employee.joined_at}</td>
               <td>{employee.active ? "Active" : "Inactive"}</td>
               <td>
-                <button
-                    
-                  className="edit-btn btn-primary mr-2"
-                  onClick={() => editRow(employee)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="view-btn btn-danger"
-                  onClick={() => deleteEmployee(employee.id)}
-                >
-                  Delete
-                </button>
+                {editing && currentEmployee.id === employee.id ? (
+                  <div>
+                    <button
+                      className="btn btn-success mr-2"
+                      onClick={() =>
+                        updateEmployee(currentEmployee.id, currentEmployee)
+                      }
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setEditing(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className="btn btn-primary mr-2"
+                      onClick={() => editRow(employee)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteEmployee(employee.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
               </td>
             </tr>
           ))}

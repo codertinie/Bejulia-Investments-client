@@ -10,8 +10,8 @@
   background-color: #f8f9fd;
 }
 
-input[type="text"],
-input[type="password"] {
+.app input[type="text"],
+.app input[type="password"] {
   height: 30px;
   width: 300px;
   border: 1px solid rgba(0, 0, 0, 0.2);;
