@@ -4,7 +4,8 @@ import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
-  const [sale, setSale] = useState({});
+  const [sales, setSales] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/products")
@@ -22,10 +23,20 @@ const Dashboard = () => {
   useEffect(() => {
     fetch("http://localhost:3000/sales")
       .then((resp) => resp.json())
-      .then((record) => {
-        setSale(record);
+      .then((records) => {
+        setSales(records);
       });
   }, []);
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const filteredSales = sales.filter((sale) => {
+    return sale.date === selectedDate;
+  });
+
+  const uniqueProducts = Array.from(new Set(filteredSales.map(sale => sale.product?.name)));
 
   return (
     <>
@@ -64,8 +75,17 @@ const Dashboard = () => {
       </div>
 
       <h1>Sales Dashboard</h1>
-      <div style={{ height: "400px", overflow: "scroll" }}>
-        <table >
+      <div>
+        <label htmlFor="date-input">Select Date:</label>
+        <input
+          type="date"
+          id="date-input"
+          value={selectedDate}
+          onChange={handleDateChange}
+        />
+      </div>
+      <div style={{ height: "350px", overflow: "scroll" }}>
+        <table>
           <thead>
             <tr>
               <th>Product Name</th>
@@ -75,14 +95,27 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(sale).map((saleId) => (
-              <tr key={saleId}>
-                <td>{sale[saleId].product ? sale[saleId].product.name : ""}</td>
-                <td>{sale[saleId].quantity}</td>
-                <td>{sale[saleId].amount}</td>
-                <td>{sale[saleId].date}</td>
-              </tr>
-            ))}
+            {uniqueProducts.map((productName) => {
+              const filteredSalesForProduct = filteredSales.filter(
+                (sale) => sale.product?.name === productName
+              );
+              const totalQuantity = filteredSalesForProduct.reduce(
+                (accumulator, sale) => accumulator + sale.quantity,
+                0
+              );
+              const totalAmount = filteredSalesForProduct.reduce(
+                (accumulator, sale) => accumulator + sale.amount,
+                0
+              );
+              return (
+                <tr key={productName}>
+                  <td>{productName}</td>
+                  <td>{totalQuantity}</td>
+                  <td>{totalAmount}</td>
+                  <td>{selectedDate}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
