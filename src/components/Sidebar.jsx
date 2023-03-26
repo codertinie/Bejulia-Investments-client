@@ -27,7 +27,7 @@ const Sidebar = ({children}) => {
         },
         {
             path:"/analytics",
-            name:"Analytics",
+            name:"Sell Product",
             icon:<FaRegChartBar/>
         },
         {
@@ -37,7 +37,7 @@ const Sidebar = ({children}) => {
         },
         {
             path:"/product",
-            name:"Product",
+            name:"ADD Product",
             icon:<FaShoppingBag/>
         },
         {
