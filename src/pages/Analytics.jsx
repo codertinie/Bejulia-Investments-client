@@ -69,6 +69,8 @@ const Analytics = () => {
       })
       .catch((error) => console.error(error));
 
+      const dateInEAT = new Date(new Date().getTime() + (3 * 60 * 60 * 1000)).toISOString().split("T")[0];
+
     fetch("http://localhost:3000/sales", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -76,7 +78,7 @@ const Analytics = () => {
         product_id: productId,
         quantity: quantity,
         amount: totalPrice,
-        date: new Date().toISOString().split("T")[0],
+        date: dateInEAT,
       }),
     })
       .then((response) => {
