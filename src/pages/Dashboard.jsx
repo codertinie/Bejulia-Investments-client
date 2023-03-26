@@ -92,7 +92,7 @@ const Dashboard = () => {
       </div>
 
       <h1>Sales Dashboard</h1>
-      <div>
+      <div className="date">
         <label htmlFor="date-input">Select Date:</label>
         <input
           type="date"

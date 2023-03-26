@@ -49,6 +49,18 @@
   font-weight: bold;
 }
 
+.date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.date label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .col-md-4 {
     width: 100%;
