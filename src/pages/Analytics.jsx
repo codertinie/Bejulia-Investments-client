@@ -36,6 +36,21 @@ const Analytics = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  
+
+  const handleProductNameChange = (event) => {
+    const selectedProductName = event.target.value;
+    setProductName(selectedProductName);
+    // Find the product ID and price for the selected product name
+    const selectedProduct = products.find(
+      (product) => product.name === selectedProductName
+    );
+    if (selectedProduct) {
+      setProductId(selectedProduct.id);
+      setPrice(selectedProduct.price);
+    }
+  };
+
   const handleSellProduct = (event) => {
     event.preventDefault();
 
@@ -58,7 +73,7 @@ const Analytics = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        product: productName,
+        product_id: productId,
         quantity: quantity,
         amount: totalPrice,
         date: new Date().toISOString().split("T")[0],
@@ -78,19 +93,6 @@ const Analytics = () => {
         }
       })
       .catch((error) => console.error(error));
-  };
-
-  const handleProductNameChange = (event) => {
-    const selectedProductName = event.target.value;
-    setProductName(selectedProductName);
-    // Find the product ID and price for the selected product name
-    const selectedProduct = products.find(
-      (product) => product.name === selectedProductName
-    );
-    if (selectedProduct) {
-      setProductId(selectedProduct.id);
-      setPrice(selectedProduct.price);
-    }
   };
 
   return (

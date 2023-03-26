@@ -19,7 +19,7 @@ const ProductList = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Category</th>
+            {/* <th>Category</th> */}
             <th>Stock Amount</th>
             <th>Price</th>
             <th>Action</th>
@@ -29,7 +29,7 @@ const ProductList = () => {
           {products.map(product => (
             <tr key={product.id}>
               <td>{product.name}</td>
-              <td>{product.category}</td>
+              {/* <td>{product.category}</td> */}
               <td>{product.stock_amount}</td>
               <td>Ksh. {product.price}</td>
               <td>

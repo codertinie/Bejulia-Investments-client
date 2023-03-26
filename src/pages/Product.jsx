@@ -5,7 +5,6 @@ import "../styles/Product.css";
 const Product = ({ onAddProduct }) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [price, setPrice] = useState("");
 
@@ -13,7 +12,7 @@ const Product = ({ onAddProduct }) => {
     event.preventDefault();
 
     // Check if any fields are empty
-    if (!name || !category || !stockAmount || !price) {
+    if (!name || !stockAmount || !price) {
       alert("Please fill in all fields");
       return;
     }
@@ -21,7 +20,7 @@ const Product = ({ onAddProduct }) => {
     // Create new product object
     const newProduct = {
       name: name,
-      category: category,
+      // category: category,
       stock_amount: stockAmount,
       price: price,
     };
@@ -45,7 +44,7 @@ const Product = ({ onAddProduct }) => {
 
       // Reset form fields
       setName("");
-      setCategory("");
+      // setCategory("");
       setStockAmount("");
       setPrice("");
     } catch (error) {
@@ -69,7 +68,7 @@ const Product = ({ onAddProduct }) => {
             onChange={(event) => setName(event.target.value)}
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="category">Category:</label>
           <input
             type="text"
@@ -78,7 +77,7 @@ const Product = ({ onAddProduct }) => {
             value={category}
             onChange={(event) => setCategory(event.target.value)}
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="stockAmount">Stock Amount:</label>
           <input

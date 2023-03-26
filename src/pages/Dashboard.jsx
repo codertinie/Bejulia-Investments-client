@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
-import Analytics from "./Analytics";
+// import Analytics from "./Analytics";
 
 const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
+  const [sale, setSale] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:3000/products")
@@ -18,16 +19,13 @@ const Dashboard = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  // const [sales, setSales] = useState([]);
-
-  // const addSale = (productName, quantity, amount) => {
-  //   const newSale = {
-  //     productName,
-  //     quantity,
-  //     amount
-  //   };
-  //   setSales([...sales, newSale]);
-  // };
+  useEffect(() => {
+    fetch("http://localhost:3000/sales")
+      .then((resp) => resp.json())
+      .then((record) => {
+        setSale(record);
+      });
+  }, []);
 
   return (
     <>
@@ -65,38 +63,29 @@ const Dashboard = () => {
         </div>
       </div>
 
-
       <h1>Sales Dashboard</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        {/* <tbody>
-          {sales.map((sale, index) => (
-            <tr key={index}>
-              <td>{sale.productName}</td>
-              <td>{sale.quantity}</td>
-              <td>{sale.amount}</td>
+      <div style={{ height: "400px", overflow: "scroll" }}>
+        <table >
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+              <th>Date</th>
             </tr>
-          ))}
-        </tbody> */}
-      </table>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+          </thead>
+          <tbody>
+            {Object.keys(sale).map((saleId) => (
+              <tr key={saleId}>
+                <td>{sale[saleId].product ? sale[saleId].product.name : ""}</td>
+                <td>{sale[saleId].quantity}</td>
+                <td>{sale[saleId].amount}</td>
+                <td>{sale[saleId].date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
