@@ -23,7 +23,7 @@ const App = () => {
   },[])
 
 
-  if (!currentUser) return <Login setCurrentUser={setCurrentUser} />
+  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />
 
   return (
     <BrowserRouter>
