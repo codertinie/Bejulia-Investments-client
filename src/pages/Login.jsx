@@ -3,7 +3,7 @@ import "../styles/Login.css";
 
 function Login({ setCurrentUser }) {
   // React States
-  const [superUser, setSuperUser] = useState ([])
+  // const [superUser, setSuperUser] = useState ([])
   const [user, setUser] = useState("")
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

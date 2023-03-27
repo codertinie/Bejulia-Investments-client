@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Analytics.css";
 
 const Analytics = () => {
@@ -6,12 +7,14 @@ const Analytics = () => {
   const [quantity, setQuantity] = useState(1);
   const [stockAmount, setStockAmount] = useState(0);
   const [quantityError, setQuantityError] = useState("");
-  const [items, setItems] = useState([])
+  // const [items, setItems] = useState([])
 
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
   const [productId, setProductId] = useState("");
   const [productNames, setProductNames] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
@@ -113,6 +116,7 @@ const Analytics = () => {
         })
         .catch((error) => console.error(error));
     }
+    navigate("/dashboard")
   };
 
   return (
