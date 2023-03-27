@@ -12,7 +12,7 @@ const ProductList = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  // console.log (products)
+  console.log (products)
 
   const handleEdit = (e) => {
     e.preventDefault();
