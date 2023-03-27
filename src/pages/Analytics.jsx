@@ -6,6 +6,7 @@ const Analytics = () => {
   const [quantity, setQuantity] = useState(1);
   const [stockAmount, setStockAmount] = useState(0);
   const [quantityError, setQuantityError] = useState("");
+  const [items, setItems] = useState([])
 
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
@@ -15,7 +16,7 @@ const Analytics = () => {
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
     if (productId) {
-      fetch(`http://127.0.0.1:3000/products/${productId}`)
+      fetch(`https://bejulia-api.onrender.com/products/${productId}`)
         .then((response) => response.json())
         .then((data) => {
           setStockAmount(data.stock_amount);
@@ -27,7 +28,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // Fetch the list of product names and IDs from the server
-    fetch("http://127.0.0.1:3000/products")
+    fetch("https://bejulia-api.onrender.com/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -72,7 +73,7 @@ const Analytics = () => {
       const totalPrice = price * quantity;
 
       // Send a request to the server to update the stock amount and create a new sale record
-      fetch(`http://127.0.0.1:3000/products/${productId}`, {
+      fetch(`https://bejulia-api.onrender.com/products/${productId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stock_amount: stockAmount - quantity }),
@@ -87,7 +88,7 @@ const Analytics = () => {
         .toISOString()
         .split("T")[0];
 
-      fetch("http://localhost:3000/sales", {
+      fetch("https://bejulia-api.onrender.com/sales", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

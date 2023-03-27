@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import "../styles/Register.css";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,7 +11,9 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [joinedAt, setJoinedAt] = useState('');
-  const [status, setStatus] = useState('');
+  // const [status, setStatus] = useState('');
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,12 +25,13 @@ const Register = () => {
         password,
         role,
         joined_at: joinedAt,
-        status,
+        // status,
       });
       console.log(response.data);
     } catch (error) {
       console.error(error);
     }
+    navigate("/employees")
   };
 
   return (
@@ -95,7 +99,7 @@ const Register = () => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="status">Status:</label>
         <input
           type="text"
@@ -104,7 +108,7 @@ const Register = () => {
           onChange={(event) => setStatus(event.target.value)}
           className="form-control"
         />
-      </div>
+      </div> */}
       <button type="submit" className="btn btn-primary">Create Employee</button>
     </form>
   );
