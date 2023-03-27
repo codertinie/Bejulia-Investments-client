@@ -10,7 +10,7 @@ const Employees = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/employees")
+    fetch("https://bejulia-api.onrender.com/employees")
       .then((resp) => resp.json())
       .then((data) => setEmployees(data));
   }, []);
@@ -50,7 +50,7 @@ const Employees = () => {
 
   const handleUpdateEmployee = () => {
     const { id, ...updatedData } = updatedEmployee;
-    fetch(`http://127.0.0.1:3000/employees/${id}`, {
+    fetch(`https://bejulia-api.onrender.com/employees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,6 @@ const Employees = () => {
   };
 
   return (
-
     <div className="table-responsive">
       <div className="add">
         <button onClick={() => navigate("/register")}>ADD Employee</button>
@@ -107,7 +106,7 @@ const Employees = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() =>
-                      fetch(`http://127.0.0.1:3000/employees/${employee.id}`, {
+                      fetch(`https://bejulia-api.onrender.com/employees/${employee.id}`, {
                         method: "DELETE",
                       })
                         .then((response) => {
@@ -131,11 +130,7 @@ const Employees = () => {
           ))}
         </tbody>
       </table>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className="modal"
-      >
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal">
         <h2>Edit Employee</h2>
         {editingEmployee && (
           <form onSubmit={handleUpdateEmployee}>
@@ -183,22 +178,6 @@ const Employees = () => {
                 onChange={handleInputChange}
               />
             </div>
-            {/* <div className="form-group">
-              <label htmlFor="active">Active</label>
-              <input
-                type="checkbox"
-                className="form-control"
-                id="active"
-                name="active"
-                checked={updatedEmployee.active}
-                onChange={() =>
-                  setUpdatedEmployee({
-                    ...updatedEmployee,
-                    active: !updatedEmployee.active,
-                  })
-                }
-              />
-            </div> */}
             <button type="submit" className="btn btn-primary">
               Update
             </button>

@@ -1,47 +1,53 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 import "../styles/Register.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
-  const [joinedAt, setJoinedAt] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [joinedAt, setJoinedAt] = useState("");
   // const [status, setStatus] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:3000/employees', {
-        name,
-        username,
-        email,
-        password,
-        role,
-        joined_at: joinedAt,
-        // status,
-      });
+      const response = await axios.post(
+        "https://bejulia-api.onrender.com/employees",
+        {
+          name,
+          username,
+          email,
+          password,
+          role,
+          joined_at: joinedAt,
+          // status,
+        }
+      );
       console.log(response.data);
     } catch (error) {
       console.error(error);
     }
-    navigate("/employees")
+    navigate("/employees");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container"
-    style={{ height: "550px", overflow: "scroll" }}>
+    <form
+      onSubmit={handleSubmit}
+      className="form-container"
+      style={{ height: "550px", overflow: "scroll" }}
+    >
       <h2>Create Employee</h2>
       <div className="form-group">
         <label htmlFor="name">Name:</label>
         <input
-        placeholder='Name'
+          placeholder="Name"
           type="text"
           id="name"
           value={name}
@@ -99,17 +105,9 @@ const Register = () => {
           className="form-control"
         />
       </div>
-      {/* <div className="form-group">
-        <label htmlFor="status">Status:</label>
-        <input
-          type="text"
-          id="status"
-          value={status}
-          onChange={(event) => setStatus(event.target.value)}
-          className="form-control"
-        />
-      </div> */}
-      <button type="submit" className="btn btn-primary">Create Employee</button>
+      <button type="submit" className="btn btn-primary">
+        Create Employee
+      </button>
     </form>
   );
 };

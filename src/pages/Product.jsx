@@ -27,7 +27,7 @@ const Product = ({ onAddProduct }) => {
 
     try {
       // Make POST request to the Rails API endpoint
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch("https://bejulia-api.onrender.com/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,16 +68,7 @@ const Product = ({ onAddProduct }) => {
             onChange={(event) => setName(event.target.value)}
           />
         </div>
-        {/* <div className="form-group">
-          <label htmlFor="category">Category:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="category"
-            value={category}
-            onChange={(event) => setCategory(event.target.value)}
-          />
-        </div> */}
+
         <div className="form-group">
           <label htmlFor="stockAmount">Stock Amount:</label>
           <input
