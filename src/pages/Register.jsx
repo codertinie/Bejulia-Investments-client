@@ -19,7 +19,7 @@ const Register = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://bejulia-api.onrender.com/employees",
+        "/employees",
         {
           name,
           username,

@@ -19,7 +19,7 @@ const Analytics = () => {
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
     if (productId) {
-      fetch(`https://bejulia-api.onrender.com/products/${productId}`)
+      fetch(`/products/${productId}`)
         .then((response) => response.json())
         .then((data) => {
           setStockAmount(data.stock_amount);
@@ -31,7 +31,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // Fetch the list of product names and IDs from the server
-    fetch("https://bejulia-api.onrender.com/products")
+    fetch("/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -91,7 +91,7 @@ const Analytics = () => {
         .toISOString()
         .split("T")[0];
 
-      fetch("https://bejulia-api.onrender.com/sales", {
+      fetch("/sales", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

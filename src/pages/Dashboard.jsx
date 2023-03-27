@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
-    fetch("https://bejulia-api.onrender.com/products")
+    fetch("/products")
       .then((response) => response.json())
       .then((data) => {
         const totalStockAmount = data.reduce(
@@ -21,7 +21,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://bejulia-api.onrender.com/sales")
+    fetch("/sales")
       .then((resp) => resp.json())
       .then((records) => {
         setSales(records);

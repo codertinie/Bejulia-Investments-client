@@ -27,7 +27,7 @@ const Product = ({ onAddProduct }) => {
 
     try {
       // Make POST request to the Rails API endpoint
-      const response = await fetch("https://bejulia-api.onrender.com/products", {
+      const response = await fetch("/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
