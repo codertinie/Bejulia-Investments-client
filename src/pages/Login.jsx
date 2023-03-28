@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
-import { API } from "./api"
+// import { API } from "./api"
 
 function Login({ setCurrentUser }) {
   // React States
@@ -15,7 +15,7 @@ function Login({ setCurrentUser }) {
     event.preventDefault();
 
     // Send a request to the server to authenticate the user
-    fetch(`${API}/login`, {
+    fetch("https://bejulia-api.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

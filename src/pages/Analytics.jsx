@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "../styles/Analytics.css";
-import { API } from "./api"
+// import { API } from "./api"
 
 
 const Analytics = () => {
@@ -22,7 +22,7 @@ const Analytics = () => {
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
     if (productId) {
-      fetch(`${API}/products/${productId}`)
+      fetch(`https://bejulia-api.onrender.com/products/${productId}`)
         .then((response) => response.json())
         .then((data) => {
           setStockAmount(data.stock_amount);
@@ -34,7 +34,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // Fetch the list of product names and IDs from the server
-    fetch(`${API}/products`)
+    fetch("https://bejulia-api.onrender.com/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -79,7 +79,7 @@ const Analytics = () => {
       const totalPrice = price * quantity;
 
       // Send a request to the server to update the stock amount and create a new sale record
-      fetch(`${API}/${productId}`, {
+      fetch(`https://bejulia-api.onrender.com/${productId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stock_amount: stockAmount - quantity }),
@@ -95,7 +95,7 @@ const Analytics = () => {
         .toISOString()
         .split("T")[0];
 
-      fetch(`${API}/sales`, {
+      fetch("https://bejulia-api.onrender.com/sales", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

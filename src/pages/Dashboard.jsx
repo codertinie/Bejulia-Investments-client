@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 // import Analytics from "./Analytics";
-import { API } from "./api"
+// import { API } from "./api"
 
 const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
@@ -11,7 +11,7 @@ const Dashboard = () => {
   
 
   useEffect(() => {
-    fetch(`${API}/products`)
+    fetch("https://bejulia-api.onrender.com/products")
       .then((response) => response.json())
       .then((data) => {
         const totalStockAmount = data.reduce(
@@ -24,7 +24,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API}/sales`)
+    fetch("https://bejulia-api.onrender.com/sales")
       .then((resp) => resp.json())
       .then((records) => {
         setSales(records);
