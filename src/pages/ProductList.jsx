@@ -5,8 +5,10 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
 
+  const API_ENDPOINT = "https://bejulia-api.onrender.com"
+
   useEffect(() => {
-    fetch("https://bejulia-api.onrender.com/products")
+    fetch(`${API_ENDPOINT}/products`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.log(error));
@@ -16,7 +18,7 @@ const ProductList = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    fetch(`https://bejulia-api.onrender.com/products/${editingProduct.id}`, {
+    fetch(`${API_ENDPOINT}/products/${editingProduct.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

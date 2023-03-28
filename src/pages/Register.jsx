@@ -15,11 +15,13 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  const API_ENDPOINT = "https://bejulia-api.onrender.com"
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://bejulia-api.onrender.com/employees",
+        `${API_ENDPOINT}/employees`,
         {
           name,
           username,

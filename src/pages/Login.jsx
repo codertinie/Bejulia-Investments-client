@@ -8,11 +8,13 @@ function Login({ setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const API_ENDPOINT = "https://bejulia-api.onrender.com"
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Send a request to the server to authenticate the user
-    fetch("https://bejulia-api.onrender.com/login", {
+    fetch(`${API_ENDPOINT}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
