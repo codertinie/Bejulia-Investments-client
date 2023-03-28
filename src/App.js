@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -11,16 +11,16 @@ import Employees from './pages/Employees';
 import Register from './pages/Register';
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState("")
+  // const [currentUser, setCurrentUser] = useState("")
 
-  useEffect(() => {
-    fetch("/auth")
-    .then(res => {
-      if(res.ok){
-        res.json().then(user => setCurrentUser(user))
-      }
-    })
-  },[])
+  // useEffect(() => {
+  //   fetch("/auth")
+  //   .then(res => {
+  //     if(res.ok){
+  //       res.json().then(user => setCurrentUser(user))
+  //     }
+  //   })
+  // },[])
 
 
   // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />

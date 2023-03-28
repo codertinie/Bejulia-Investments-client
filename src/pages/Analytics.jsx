@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "../styles/Analytics.css";
 
 const Analytics = () => {
@@ -14,7 +14,7 @@ const Analytics = () => {
   const [productId, setProductId] = useState("");
   const [productNames, setProductNames] = useState([]);
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
@@ -84,6 +84,7 @@ const Analytics = () => {
         .then((response) => response.json())
         .then((data) => {
           setStockAmount(data.stock_amount);
+          console.log(stockAmount)
         })
         .catch((error) => console.error(error));
 
@@ -116,7 +117,7 @@ const Analytics = () => {
         })
         .catch((error) => console.error(error));
     }
-    navigate("/dashboard")
+    // navigate("/dashboard")
   };
 
   return (
