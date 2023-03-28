@@ -15,12 +15,12 @@ const Analytics = () => {
   const [productNames, setProductNames] = useState([]);
 
   // const navigate = useNavigate()
-  const API_ENDPOINT = "https://bejulia-api.onrender.com"
+  const API = "https://bejulia-api.onrender.com"
 
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server
     if (productId) {
-      fetch(`${API_ENDPOINT}/products/${productId}`)
+      fetch(`${API}/products/${productId}`)
         .then((response) => response.json())
         .then((data) => {
           setStockAmount(data.stock_amount);
@@ -32,7 +32,7 @@ const Analytics = () => {
 
   useEffect(() => {
     // Fetch the list of product names and IDs from the server
-    fetch(`${API_ENDPOINT}/products`)
+    fetch(`${API}/products`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -77,7 +77,7 @@ const Analytics = () => {
       const totalPrice = price * quantity;
 
       // Send a request to the server to update the stock amount and create a new sale record
-      fetch(`${API_ENDPOINT}/${productId}`, {
+      fetch(`${API}/${productId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stock_amount: stockAmount - quantity }),
@@ -93,7 +93,7 @@ const Analytics = () => {
         .toISOString()
         .split("T")[0];
 
-      fetch(`${API_ENDPOINT}/sales`, {
+      fetch(`${API}/sales`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

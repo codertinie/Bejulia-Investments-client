@@ -8,7 +8,7 @@ const Product = ({ onAddProduct }) => {
   const [stockAmount, setStockAmount] = useState("");
   const [price, setPrice] = useState("");
 
-  const API_ENDPOINT = "https://bejulia-api.onrender.com"
+  const API = "https://bejulia-api.onrender.com"
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,7 +29,7 @@ const Product = ({ onAddProduct }) => {
 
     try {
       // Make POST request to the Rails API endpoint
-      const response = await fetch(`${API_ENDPOINT}/products`, {
+      const response = await fetch(`${API}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
