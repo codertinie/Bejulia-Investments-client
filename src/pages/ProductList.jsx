@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ProductList.css";
-
-const API = "https://bejulia-api.onrender.com"
+import { API } from "./api"
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);

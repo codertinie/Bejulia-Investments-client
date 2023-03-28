@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Product.css";
-
-const API = "https://bejulia-api.onrender.com"
+import { API } from "./api"
 
 const Product = ({ onAddProduct }) => {
   const navigate = useNavigate();

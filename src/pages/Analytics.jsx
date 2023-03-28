@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "../styles/Analytics.css";
+import { API } from "./api"
 
-const API = "https://bejulia-api.onrender.com"
 
 const Analytics = () => {
   const [price, setPrice] = useState(0);

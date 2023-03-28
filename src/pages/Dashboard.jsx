@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 // import Analytics from "./Analytics";
-
-const API = "https://bejulia-api.onrender.com"
+import { API } from "./api"
 
 const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);

@@ -3,8 +3,7 @@ import axios from "axios";
 
 import "../styles/Register.css";
 import { useNavigate } from "react-router-dom";
-
-const API = "https://bejulia-api.onrender.com"
+import { API } from "./api"
 
 const Register = () => {
   const [name, setName] = useState("");

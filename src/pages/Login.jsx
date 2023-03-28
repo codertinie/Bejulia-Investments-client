@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
-
-const API = "https://bejulia-api.onrender.com"
+import { API } from "./api"
 
 function Login({ setCurrentUser }) {
   // React States

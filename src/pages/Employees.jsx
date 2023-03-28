@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Employees.css";
 import Modal from "react-modal";
+import { API } from "./api"
 
 Modal.setAppElement("#root");
 
-const API = "https://bejulia-api.onrender.com"
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
 
   
-
   useEffect(() => {
     fetch(`${API}/employees`)
       .then((resp) => resp.json())
