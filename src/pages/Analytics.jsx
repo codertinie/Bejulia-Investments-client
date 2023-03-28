@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "../styles/Analytics.css";
 
+const API = "https://bejulia-api.onrender.com"
+
 const Analytics = () => {
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -15,7 +17,7 @@ const Analytics = () => {
   const [productNames, setProductNames] = useState([]);
 
   // const navigate = useNavigate()
-  const API = "https://bejulia-api.onrender.com"
+  
 
   useEffect(() => {
     // Fetch the current stock amount and price of the product from the server

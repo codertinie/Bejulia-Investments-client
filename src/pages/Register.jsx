@@ -4,6 +4,8 @@ import axios from "axios";
 import "../styles/Register.css";
 import { useNavigate } from "react-router-dom";
 
+const API = "https://bejulia-api.onrender.com"
+
 const Register = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -15,7 +17,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Product.css";
 
+const API = "https://bejulia-api.onrender.com"
+
 const Product = ({ onAddProduct }) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [price, setPrice] = useState("");
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

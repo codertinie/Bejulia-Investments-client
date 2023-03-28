@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
 
+const API = "https://bejulia-api.onrender.com"
+
 function Login({ setCurrentUser }) {
   // React States
   // const [superUser, setSuperUser] = useState ([])
@@ -8,7 +10,7 @@ function Login({ setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

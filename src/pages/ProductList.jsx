@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ProductList.css";
 
+const API = "https://bejulia-api.onrender.com"
+
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   useEffect(() => {
     fetch(`${API}/products`)

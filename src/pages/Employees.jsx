@@ -5,11 +5,13 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
+const API = "https://bejulia-api.onrender.com"
+
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   useEffect(() => {
     fetch(`${API}/employees`)

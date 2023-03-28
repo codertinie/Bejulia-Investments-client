@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 // import Analytics from "./Analytics";
 
+const API = "https://bejulia-api.onrender.com"
+
 const Dashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [sales, setSales] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
 
-  const API = "https://bejulia-api.onrender.com"
+  
 
   useEffect(() => {
     fetch(`${API}/products`)
