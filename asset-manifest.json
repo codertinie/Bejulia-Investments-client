@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Bejulia-Investments-client/static/css/main.4379e5d8.css",
+    "main.js": "/Bejulia-Investments-client/static/js/main.68814584.js",
+    "static/js/787.e9a9ac3b.chunk.js": "/Bejulia-Investments-client/static/js/787.e9a9ac3b.chunk.js",
+    "index.html": "/Bejulia-Investments-client/index.html",
+    "main.4379e5d8.css.map": "/Bejulia-Investments-client/static/css/main.4379e5d8.css.map",
+    "main.68814584.js.map": "/Bejulia-Investments-client/static/js/main.68814584.js.map",
+    "787.e9a9ac3b.chunk.js.map": "/Bejulia-Investments-client/static/js/787.e9a9ac3b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4379e5d8.css",
+    "static/js/main.68814584.js"
+  ]
+}
