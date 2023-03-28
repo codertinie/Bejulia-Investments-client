@@ -12,7 +12,7 @@ function Login({ setCurrentUser }) {
     event.preventDefault();
 
     // Send a request to the server to authenticate the user
-    fetch("/login", {
+    fetch("https://bejulia-api.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),

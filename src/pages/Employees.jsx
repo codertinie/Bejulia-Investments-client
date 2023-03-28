@@ -10,7 +10,7 @@ const Employees = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/employees")
+    fetch("https://bejulia-api.onrender.com/employees")
       .then((resp) => resp.json())
       .then((data) => setEmployees(data));
   }, []);
@@ -50,7 +50,7 @@ const Employees = () => {
 
   const handleUpdateEmployee = () => {
     const { id, ...updatedData } = updatedEmployee;
-    fetch(`/employees/${id}`, {
+    fetch(`https://bejulia-api.onrender.com/employees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const Employees = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() =>
-                      fetch(`/employees/${employee.id}`, {
+                      fetch(`https://bejulia-api.onrender.com/employees/${employee.id}`, {
                         method: "DELETE",
                       })
                         .then((response) => {
