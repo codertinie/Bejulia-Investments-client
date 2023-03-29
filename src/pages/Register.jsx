@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "../styles/Register.css";
 import { useNavigate } from "react-router-dom";
-// import { API } from "./api"
+import { API } from "./api"
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -22,7 +22,7 @@ const Register = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://bejulia-api.onrender.com/employees",
+        `${API}/employees`,
         {
           name,
           username,

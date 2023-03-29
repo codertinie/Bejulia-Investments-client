@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ProductList.css";
-// import { API } from "./api"
+import { API } from "./api"
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +9,7 @@ const ProductList = () => {
   
 
   useEffect(() => {
-    fetch("https://bejulia-api.onrender.com/products")
+    fetch(`${API}/products`)
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.log(error));
@@ -19,7 +19,7 @@ const ProductList = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    fetch(`https://bejulia-api.onrender.com/products/${editingProduct.id}`, {
+    fetch(`${API}/products/${editingProduct.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Product.css";
-// import { API } from "./api"
+import { API } from "./api"
 
 const Product = ({ onAddProduct }) => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Product = ({ onAddProduct }) => {
 
     try {
       // Make POST request to the Rails API endpoint
-      const response = await fetch("https://bejulia-api.onrender.com/products", {
+      const response = await fetch(`${API}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

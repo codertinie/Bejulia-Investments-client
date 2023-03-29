@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Employees.css";
 import Modal from "react-modal";
-// import { API } from "./api"
+import { API } from "./api"
 
 Modal.setAppElement("#root");
 
@@ -13,7 +13,7 @@ const Employees = () => {
 
   
   useEffect(() => {
-    fetch("https://bejulia-api.onrender.com/employees")
+    fetch(`${API}/employees`)
       .then((resp) => resp.json())
       .then((data) => setEmployees(data));
   }, []);
@@ -53,7 +53,7 @@ const Employees = () => {
 
   const handleUpdateEmployee = () => {
     const { id, ...updatedData } = updatedEmployee;
-    fetch(`https://bejulia-api.onrender.com/employees/${id}`, {
+    fetch(`${API}/employees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const Employees = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() =>
-                      fetch(`https://bejulia-api.onrender.com/employees/${employee.id}`, {
+                      fetch(`${API}/employees/${employee.id}`, {
                         method: "DELETE",
                       })
                         .then((response) => {
